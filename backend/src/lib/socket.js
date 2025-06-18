@@ -1,9 +1,9 @@
 import { Server } from "socket.io";
-import https from "https";
+import http from "http";
 import express from "express";
 
 const app = express();
-const server = https.createServer(app);
+const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
@@ -13,7 +13,7 @@ const io = new Server(server, {
           "https://your-app-name-git-main-your-username.vercel.app", // Replace with your actual Vercel preview domain
           process.env.FRONTEND_URL // You can also set this as an environment variable
         ].filter(Boolean)
-      : ["https://localhost:5173"],
+      : ["http://localhost:5173"],
     credentials: true
   },
 });

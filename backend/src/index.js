@@ -27,7 +27,7 @@ const corsOptions = {
         "https://your-app-name-git-main-your-username.vercel.app", // Replace with your actual Vercel preview domain
         process.env.FRONTEND_URL // You can also set this as an environment variable
       ].filter(Boolean)
-    : "https://localhost:5173",
+    : "http://localhost:5173",
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization", "Cookie"]
