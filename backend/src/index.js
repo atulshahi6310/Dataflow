@@ -18,12 +18,22 @@ const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-  })
-);
+
+// CORS configuration
+const corsOptions = {
+  origin: process.env.NODE_ENV === "production" 
+    ? [
+        "https://your-app-name.vercel.app", // Replace with your actual Vercel domain
+        "https://your-app-name-git-main-your-username.vercel.app", // Replace with your actual Vercel preview domain
+        process.env.FRONTEND_URL // You can also set this as an environment variable
+      ].filter(Boolean)
+    : "https://localhost:5173",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "Cookie"]
+};
+
+app.use(cors(corsOptions));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
